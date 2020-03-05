@@ -20,6 +20,9 @@ document.onreadystatechange = function first() {
       })();
 
       (function selectMainMenuItem() {
+        const toggleMenu = document.getElementsByClassName('toggle-menu')[0];
+        const header = document.getElementsByTagName('header')[0];
+        const main = document.getElementsByTagName('main')[0];
         const mainMenuItem = Array.from(
           document.getElementsByClassName('main-menu__item')
         );
@@ -27,6 +30,9 @@ document.onreadystatechange = function first() {
           item.addEventListener('click', () => {
             mainMenuItem.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
+            toggleMenu.classList.toggle('active');
+            header.classList.toggle('active');
+            main.classList.toggle('active');
           });
         });
       })();

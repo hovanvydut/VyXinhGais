@@ -7,6 +7,7 @@ import PopularArticleComp from '../components/PopularArticle';
 import HashTagComp from '../components/HaskTag';
 import NewsLetterComp from '../components/NewsLetter';
 import PostComp from '../components/Post';
+import LoadingBar from '../components/LoadingBar';
 import * as postAction from '../actions/posts';
 
 class Post extends Component {
@@ -16,10 +17,22 @@ class Post extends Component {
     getPost(linkPost);
   }
 
+  showLoading = () => {
+    let html = '';
+    const { loading } = this.props;
+    const { show } = loading;
+    if (show) {
+      html = <LoadingBar />;
+    }
+    return html;
+  };
+
   render() {
     const { postDetail } = this.props;
+
     return (
       <main>
+        {this.showLoading()}
         <section className="posts full-post">
           <PostComp postDetail={postDetail} />
         </section>
@@ -68,12 +81,14 @@ class Post extends Component {
 Post.propTypes = {
   match: PropTypes.object,
   getPost: PropTypes.func,
-  postDetail: PropTypes.object
+  postDetail: PropTypes.object,
+  loading: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
-    postDetail: state.posts.post_detail
+    postDetail: state.posts.post_detail,
+    loading: state.ui.loading
   };
 };
 

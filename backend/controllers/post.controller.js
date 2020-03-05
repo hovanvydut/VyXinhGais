@@ -3,18 +3,23 @@ const postModel = require('./../model/postModel');
 module.exports = {
     getPost: function(req, res, next) {
         const { linkPost } = req.query;
-        let where = {};
+        let condition = {};
         if (linkPost) {
-            where = { linkPost };
-            postModel.findOne(where, (err, doc) => {
-                if (err) {
-                    return res.status(404).json(err);
-                } else {
-                    res.status(200).json(doc);
-                }
-            });
+            condition = { linkPost };
+            postModel
+                .findOne(condition)
+                .populate({ path: 'author', select: 'name description' })
+                .populate({ path: 'tags' })
+                .exec((err, doc) => {
+                    if (!doc) {
+                        console.log('error at file post.controller');
+                        return res.status(404).json(err);
+                    } else {
+                        res.status(200).json(doc);
+                    }
+                });
         } else {
-            postModel.find(where, (err, docs) => {
+            postModel.find(condition, (err, docs) => {
                 if (err) {
                     return res.status(404).json(err);
                 } else {

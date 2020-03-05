@@ -1,13 +1,5 @@
 {
-    "folders": [{
-            "path": "F:\\02. Resource\\ReactJS nghiepuit\\8. saga"
-        },
-        {
-            "path": "D:\\03. DEV\\09. Blog\\backend"
-        },
-        {
-            "path": "D:\\03. DEV\\09. Blog\\frontend\\adminlte"
-        },
+    "folders": [
         {
             "path": "D:\\03. DEV\\09. Blog\\frontend\\blogreact"
         }

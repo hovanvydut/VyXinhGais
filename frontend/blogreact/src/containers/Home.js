@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingBar from '../components/LoadingBar';
 import * as actionPost from '../actions/posts';
 import ArticleComp from '../components/Article';
 import CategoriesComp from '../components/Categories';
@@ -16,6 +17,16 @@ class Home extends Component {
     getThumb('newest');
   }
 
+  showLoading = () => {
+    let html = '';
+    const { loading } = this.props;
+    const { show } = loading;
+    if (show) {
+      html = <LoadingBar />;
+    }
+    return html;
+  };
+
   renderThumb = () => {
     const { thumbList } = this.props;
     const xhtml = [];
@@ -29,6 +40,7 @@ class Home extends Component {
     return (
       <main>
         <section className="posts">
+          {this.showLoading()}
           {this.renderThumb()}
           <PaginationComp />
         </section>
@@ -76,12 +88,14 @@ class Home extends Component {
 
 Home.propTypes = {
   getThumb: PropTypes.func,
-  thumbList: PropTypes.array
+  thumbList: PropTypes.array,
+  loading: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
-    thumbList: state.posts.post_thumb.home
+    thumbList: state.posts.post_thumb.home,
+    loading: state.ui.loading
   };
 };
 

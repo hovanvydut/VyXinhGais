@@ -1,14 +1,26 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ArticleComp from '../components/Article';
-import PaginationComp from '../components/Pagination';
 import * as actionPost from '../actions/posts';
+import ArticleComp from '../components/Article';
+import LoadingBar from '../components/LoadingBar';
+import PaginationComp from '../components/Pagination';
 
 class Fashion extends Component {
   componentDidMount() {
     const { getThumb } = this.props;
     getThumb('newest');
   }
+
+  showLoading = () => {
+    let html = '';
+    const { loading } = this.props;
+    const { show } = loading;
+    if (show) {
+      html = <LoadingBar />;
+    }
+    return html;
+  };
 
   renderThumb = () => {
     const { thumbList } = this.props;
@@ -22,6 +34,7 @@ class Fashion extends Component {
   render() {
     return (
       <main className="fashion-page">
+        {this.showLoading()}
         <section className="posts">
           {this.renderThumb()}
           <PaginationComp />
@@ -31,9 +44,16 @@ class Fashion extends Component {
   }
 }
 
+Fashion.propTypes = {
+  getThumb: PropTypes.func,
+  thumbList: PropTypes.array,
+  loading: PropTypes.object
+};
+
 const mapStateToProps = state => {
   return {
-    thumbList: state.posts.post_thumb.home
+    thumbList: state.posts.post_thumb.home,
+    loading: state.ui.loading
   };
 };
 

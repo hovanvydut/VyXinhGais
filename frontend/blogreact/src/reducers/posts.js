@@ -34,9 +34,17 @@ function PostReducer(state = initialState, action) {
     }
     case types.GET_POST_SUCCESS: {
       const { post } = action.payload;
+      post.status = 'success';
       return {
         ...state,
         post_detail: post
+      };
+    }
+    case types.GET_POST_FAILED: {
+      const { error } = action.payload;
+      console.log(error);
+      return {
+        ...state
       };
     }
 
