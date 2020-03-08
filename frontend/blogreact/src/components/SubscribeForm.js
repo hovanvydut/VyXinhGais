@@ -18,9 +18,8 @@ class SubcribeForm extends React.Component {
         </div>
         <div className="copyright">
           <p>
-            Copyright ©2020 All rights reserved | This template is made with
-            <i className="fas fa-heart" />
-            by hovanvydut
+            Copyright ©2020 All rights reserved | This template is made with{' '}
+            <i className="fas fa-heart" /> by hovanvydut
           </p>
         </div>
       </div>

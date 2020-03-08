@@ -45,11 +45,11 @@ export const getPostSuccess = post => {
   };
 };
 
-export const getPostFailed = error => {
+export const getPostFailed = errorMessage => {
   return {
     type: types.GET_POST_FAILED,
     payload: {
-      error
+      errorMessage
     }
   };
 };

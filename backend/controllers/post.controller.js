@@ -13,8 +13,9 @@ module.exports = {
                 .exec((err, doc) => {
                     if (!doc) {
                         console.log('error at file post.controller');
-                        return res.status(404).json(err);
+                        return res.status(404).json('Khong tim thay');
                     } else {
+                        console.log('success at file post.controller');
                         res.status(200).json(doc);
                     }
                 });

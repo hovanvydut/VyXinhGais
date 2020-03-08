@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import SearchBarComp from '../components/SearchBar';
 import CategoriesComp from '../components/Categories';
 import PopularArticleComp from '../components/PopularArticle';
@@ -29,7 +30,9 @@ class Post extends Component {
 
   render() {
     const { postDetail } = this.props;
-
+    if (postDetail.status === 'failed') {
+      return <Redirect to="/error" />;
+    }
     return (
       <main>
         {this.showLoading()}

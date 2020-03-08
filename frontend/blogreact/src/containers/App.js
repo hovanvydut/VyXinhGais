@@ -32,6 +32,7 @@ class App extends React.Component {
             <Route path="/fashion" component={Fashion} />
             <Route path="/travel.html" component={Travel} />
             <Route path="/post/:linkPost" component={Post} />
+            <Route path="/error" component={Error} />
             <Route path="*" component={Error} />
           </Switch>
           <LoadingComp />

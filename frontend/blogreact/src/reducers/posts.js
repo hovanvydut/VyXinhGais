@@ -4,7 +4,9 @@ const initialState = {
   post_thumb: {
     home: []
   },
-  post_detail: {}
+  post_detail: {
+    status: 'success'
+  }
 };
 
 function PostReducer(state = initialState, action) {
@@ -29,8 +31,12 @@ function PostReducer(state = initialState, action) {
     }
 
     case types.GET_POST: {
-      // no reload page
-      return state;
+      return {
+        ...state,
+        post_detail: {
+          status: 'success'
+        }
+      };
     }
     case types.GET_POST_SUCCESS: {
       const { post } = action.payload;
@@ -41,10 +47,12 @@ function PostReducer(state = initialState, action) {
       };
     }
     case types.GET_POST_FAILED: {
-      const { error } = action.payload;
-      console.log(error);
+      const { errorMessage } = action.payload;
       return {
-        ...state
+        ...state,
+        post_detail: {
+          status: 'failed'
+        }
       };
     }
 
