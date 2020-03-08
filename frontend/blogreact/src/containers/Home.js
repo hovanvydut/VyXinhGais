@@ -13,6 +13,7 @@ import SearchBarComp from '../components/SearchBar';
 
 class Home extends Component {
   componentDidMount() {
+    console.log('Home: component did mount');
     const { getThumb } = this.props;
     getThumb('newest');
   }

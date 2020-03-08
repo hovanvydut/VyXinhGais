@@ -8,6 +8,7 @@ import * as actionUi from '../actions/ui';
 function* getThumbSaga(action) {
   yield put(actionUi.showLoading());
   const { subject } = action.payload;
+  console.log('load thumb');
   const { data, status } = yield axios.get(
     `http://localhost:4400/api/v1/thumb-posts?subject=${subject}`
   );
@@ -25,10 +26,10 @@ function* getPostSaga(action) {
   const { data, status } = yield axios.get(
     `http://localhost:4400/api/v1/posts?linkPost=${linkPost}`
   );
+  console.log(status);
   if (status === 200) {
     yield put(actionPost.getPostSuccess(data));
   } else {
-    console.log('haha');
     yield put(actionPost.getPostFailed('Loi nay'));
   }
   yield put(actionUi.hideLoading());

@@ -8,6 +8,7 @@ import PaginationComp from '../components/Pagination';
 
 class Fashion extends Component {
   componentDidMount() {
+    console.log('Fashion: component did mount');
     const { getThumb } = this.props;
     getThumb('newest');
   }
